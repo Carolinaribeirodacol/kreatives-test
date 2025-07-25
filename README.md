@@ -18,10 +18,9 @@ Este é um projeto FULL STACK com Laravel + Sanctum no backend e Vue + Pinia no 
    cd kreatives-test
    ```
 
-2. Copie os arquivos .env para o backend e o frontend
+2. Copie os arquivos .env para o backend
    ```sh
       cp backend/.env.example backend/.env
-      cp frontend/.env.example frontend/.env
    ```
 
    Edite os arquivos se quiser alterar host, portas, domínios, banco etc.
@@ -64,11 +63,6 @@ Backend (backend/.env)
    SANCTUM_STATEFUL_DOMAINS=localhost:3000
    SESSION_DOMAIN=localhost
 ```
-
-Frontend (frontend/.env)
-   ```sh
-      VITE_API_URL=http://localhost:5050/api
-   ```
 
 ### Testar login
    Use os dados do seeder (email:admin@admin.com / password: senha123).
