@@ -2,20 +2,21 @@
   <div class="min-h-screen flex flex-col">
     <nav class="bg-gray-800 text-white p-4 flex justify-between items-center">
       <div class="flex space-x-4">
-        <button
-          @click="page = 'home'"
-          class="px-3 py-2 rounded hover:bg-gray-700"
-        >
-          Home
-        </button>
-
-        <button
-          v-if="isLoggedIn"
-          @click="page = 'users'"
-          class="px-3 py-2 rounded hover:bg-gray-700"
-        >
-          Usuários
-        </button>
+        <span v-if="isLoggedIn">
+          <button
+            @click="page = 'home'"
+            class="px-3 py-2 rounded hover:bg-gray-700"
+          >
+            Home
+          </button>
+  
+          <button
+            @click="page = 'users'"
+            class="px-3 py-2 rounded hover:bg-gray-700"
+          >
+            Usuários
+          </button>
+        </span>
 
         <button
           v-if="!isLoggedIn"

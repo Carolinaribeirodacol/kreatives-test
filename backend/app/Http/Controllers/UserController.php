@@ -26,7 +26,7 @@ class UserController extends Controller
             'name' => 'required|string|max:100',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
-            'role_slug' => ['required', Rule::in(['adm', 'usuario'])],
+            'role_slug' => 'required|string|in:usuario,adm',
         ]);
 
         $data['password'] = Hash::make($data['password']);
