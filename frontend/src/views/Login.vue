@@ -1,10 +1,14 @@
 <template>
   <div class="login">
     <h2>Login</h2>
+    
     <form @submit.prevent="submitLogin">
       <input v-model="email" placeholder="Email" />
+
       <input v-model="password" type="password" placeholder="Senha" />
+
       <button type="submit">Entrar</button>
+
       <p v-if="errorMessage" style="color: red">{{ errorMessage }}</p>
     </form>
   </div>
