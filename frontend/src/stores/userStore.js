@@ -5,23 +5,34 @@ export const useUserStore = defineStore('user', {
   state: () => ({
     token: localStorage.getItem('token') || '',
     users: [],
-    user: null,
+    user: JSON.parse(localStorage.getItem('user')) || null,
   }),
 
+   // Vou usar para acessar no componente e validar
   getters: {
     isAuthenticated: (state) => !!state.token,
+    isAdmin: (state) => state.user?.role_slug === 'adm',
   },
 
   actions: {
     async login(email, password) {
       const res = await api.post('/login', { email, password })
+
       this.token = res.data.token
       localStorage.setItem('token', this.token)
+      
+      const me = await api.get('/me')
+      this.user = me.data
+
+      localStorage.setItem('user', JSON.stringify(this.user))
     },
 
     async logout() {
       this.token = ''
+      this.user = null
+      
       localStorage.removeItem('token')
+      localStorage.removeItem('user')
     },
 
     async fetchUsers() {

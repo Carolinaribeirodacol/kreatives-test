@@ -1,6 +1,6 @@
 <template>
   <div class="p-6 bg-gray-50 min-h-screen">
-    <h1 class="text-2xl font-semibold text-gray-800 mb-6">Dashboard</h1>
+    <h1 class="text-2xl font-semibold text-gray-800 mb-6">Olá, {{ store.user.name }}</h1>
     
     <div class="bg-white rounded-lg shadow p-6 border border-gray-200">
       <h2 class="text-lg font-medium text-gray-700 mb-2">Total de usuários</h2>
