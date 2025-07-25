@@ -68,7 +68,7 @@
 
           <button
             @click="confirmDelete(user.id)"
-            :disabled="!isAdmin"
+            :disabled="!isAdmin || user.id === store.user.id"
             class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
           >
             Deletar
