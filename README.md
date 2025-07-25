@@ -26,22 +26,27 @@ Este é um projeto FULL STACK com Laravel + Sanctum no backend e Vue + Pinia no 
 
    Edite os arquivos se quiser alterar host, portas, domínios, banco etc.
 
-3. Gere a chave de aplicação do Laravel
+3. Build e subida dos containers
+   ```sh
+      docker-compose up --build -d
+   ```
+
+4. Gere a chave de aplicação do Laravel
    ```sh
       docker-compose exec backend php artisan key:generate
    ```
 
-4. Execute as migrations e seeders
+5. Execute as migrations e seeders
    ```sh
       docker-compose exec backend php artisan migrate --seed
    ```
 
-5. Corrija permissões (Linux/macOS)
+6. Corrija permissões (Linux/macOS)
    ```sh
      sudo chown -R $USER:$USER backend/storage backend/bootstrap/cache
    ```
 
-6. Acesse no navegador
+7. Acesse no navegador
    Frontend: http://localhost:3000
    Backend (API): http://localhost:5050
 
