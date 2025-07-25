@@ -1,11 +1,10 @@
-FROM node:20-alpine
+FROM node:20
 
 WORKDIR /app
 
-COPY frontend/package*.json ./
-RUN npm install
+COPY . .
 
-COPY frontend .
+RUN npm install
 
 EXPOSE 5173
 
