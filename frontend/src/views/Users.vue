@@ -46,6 +46,17 @@
       </button>
     </div>
 
+    <div class="mb-4">
+      <input
+        v-model="search"
+        @input="fetchUsers"
+        @keyup.enter="handleSearch"
+        type="text"
+        placeholder="Buscar por nome ou email"
+        class="mb-4 p-2 border border-gray-300 rounded w-full"
+      />
+    </div>
+
     <ul class="space-y-2 mb-6">
       <li
         v-for="user in users"
@@ -85,20 +96,35 @@ import { useUserStore } from "../stores/userStore";
 import { maskEmail } from "../utils/masks.js";
 import UserCreateModal from "@/components/UserCreateModal.vue";
 import UserEditModal from "@/components/UserEditModal.vue";
+import { debounce } from "lodash"
 
 const store = useUserStore();
-const search = ref("");
 const users = ref([]);
+const search = ref("");
 const showAdd = ref(false);
 const showEdit = ref(false);
 const userToEdit = ref(null);
 
 const isAdmin = computed(() => store.isAdmin);
 
-const fetchUsers = async () => {
-  await store.fetchUsers(search.value);
-  users.value = store.users;
+const handleSearch = () => {
+  const params = new URLSearchParams(window.location.search);
+
+  if (search.value) {
+    params.set("search", search.value);
+  } else {
+    params.delete("search");
+  }
+
+  window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+
+  fetchUsers();
 };
+
+const fetchUsers = debounce(async () => {
+  await store.fetchUsers(search.value)
+  users.value = store.users
+}, 300)
 
 const edit = (user) => {
   userToEdit.value = { ...user };
@@ -111,7 +137,7 @@ const showSuccess = ref(false);
 const showMessage = (message) => {
   successMessage.value = message;
   showSuccess.value = true;
-  
+
   setTimeout(() => {
     showSuccess.value = false;
   }, 3000);

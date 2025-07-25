@@ -16,9 +16,9 @@ export const useUserStore = defineStore('user', {
 
   actions: {
     async login(email, password) {
-      const res = await api.post('/login', { email, password })
+      const response = await api.post('/login', { email, password })
 
-      this.token = res.data.token
+      this.token = response.data.token
       localStorage.setItem('token', this.token)
       
       const me = await api.get('/me')
@@ -35,9 +35,14 @@ export const useUserStore = defineStore('user', {
       localStorage.removeItem('user')
     },
 
-    async fetchUsers() {
-      const res = await api.get('/users')
-      this.users = res.data
+    async fetchUsers(search = "") {
+      try {
+        const params = search ? { search } : {};
+        const response = await api.get("/users", { params });
+        this.users = response.data;
+      } catch (error) {
+        console.error("Erro ao buscar usuários:", error);
+      }
     },
 
     async addUser(data) {
