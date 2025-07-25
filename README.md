@@ -46,6 +46,7 @@ Este é um projeto FULL STACK com Laravel + Sanctum no backend e Vue + Pinia no 
 
    ```sh
       docker-compose up --build -d
+      docker-compose exec backend composer install
    ```
 
 4. Gere a chave de aplicação do Laravel
