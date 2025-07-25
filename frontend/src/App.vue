@@ -1,47 +1,27 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div class="min-h-screen flex flex-col">
+    <nav class="bg-gray-800 text-white p-4 flex space-x-4">
+      <button @click="page = 'home'" class="px-3 py-2 rounded">Home</button> |
+      <button @click="page = 'users'" class="px-3 py-2 rounded">
+        Usuários
+      </button>
+      |
+      <button @click="page = 'login'" class="px-3 py-2 rounded">Login</button>
+    </nav>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <main class="flex-grow p-6 bg-gray-50">
+      <Home v-if="page === 'home'" />
+      <Users v-else-if="page === 'users'" />
+      <Login v-else-if="page === 'login'" @loggedIn="page = 'home'" />
+    </main>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script setup>
+import { ref } from "vue";
+import Home from "./views/Home.vue";
+import Users from "./views/Users.vue";
+import Login from "./views/Login.vue";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+const page = ref("home");
+</script>
