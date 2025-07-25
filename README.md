@@ -21,7 +21,7 @@ Este é um projeto FULL STACK com Laravel + Sanctum no backend e Vue + Pinia no 
 2. Copie os arquivos .env para o backend e o frontend
    ```sh
       cp backend/.env.example backend/.env
-      cp frontend/.env.example frontend/.env
+      cp frontend/.env.example frontend/.env.local
    ```
 
    Edite os arquivos se quiser alterar host, portas, domínios, banco etc.
