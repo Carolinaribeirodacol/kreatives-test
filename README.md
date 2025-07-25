@@ -1,6 +1,6 @@
 # Meu App Fullstack
 
-Este é um projeto FULL STACK separado em um backend (Laravel + Sanctum) e frontend (Vue + Pinia). Ambos são containerizados com Docker, facilitando o deploy e o gerenciamento dos serviços.
+Este é um projeto FULL STACK com Laravel + Sanctum no backend e Vue + Pinia no frontend, separados em dois diretórios e containerizados com Docker.
 
 ## Como executar
 
@@ -8,9 +8,9 @@ Este é um projeto FULL STACK separado em um backend (Laravel + Sanctum) e front
 
 - Docker
 - Docker Compose
-- Banco de dados configurado (ex: MySQL, PostgreSQL)
+- Porta 3000 e 5050 livres (ou ajuste no docker-compose.yml)
 
-### Passos para rodar o projeto
+### Como rodar o projeto localmente
 
 1. Clone o repositório:
    ```sh
@@ -18,24 +18,52 @@ Este é um projeto FULL STACK separado em um backend (Laravel + Sanctum) e front
    cd kreatives-test
    ```
 
-2. Execute os containers com Docker Compose:
+2. Copie os arquivos .env para o backend e o frontend
    ```sh
-   docker-compose up --build
-   ```
-   > Para rodar em segundo plano, use: `docker-compose up --build -d`
-
-3. Abra um novo terminal e rode as migrations e seeders dentro do container backend:
-   ```sh
-   docker-compose exec backend php artisan migrate --seed
-   ```
-   > Isso garante que o banco esteja montado e populado para uso.
-
-4. Para parar os containers:
-   ```sh
-   docker-compose down
+      cp backend/.env.example backend/.env
+      cp frontend/.env.example frontend/.env
    ```
 
-### Acesso aos serviços
+   Edite os arquivos se quiser alterar host, portas, domínios, banco etc.
 
-- Frontend disponível em: `http://localhost:3000`
-- Backend disponível em: `http://localhost:5050` (ou porta configurada)
+3. Gere a chave de aplicação do Laravel
+   ```sh
+      docker-compose up --build -d
+      docker-compose exec backend php artisan key:generate
+   ```
+
+4. Execute as migrations e seeders
+   ```sh
+      docker-compose exec backend php artisan migrate --seed
+   ```
+
+5. Corrija permissões (Linux/macOS)
+   ```sh
+     sudo chown -R $USER:$USER backend/storage backend/bootstrap/cache
+   ```
+
+6. Acesse no navegador
+   Frontend: http://localhost:3000
+   Backend (API): http://localhost:5050
+
+### Variáveis de ambiente importantes
+Backend (backend/.env)
+```sh
+   APP_URL=http://localhost:5050
+   DB_HOST=mysql
+   DB_PORT=3306
+   DB_DATABASE=kreative
+   DB_USERNAME=root
+   DB_PASSWORD=root
+
+   SANCTUM_STATEFUL_DOMAINS=localhost:3000
+   SESSION_DOMAIN=localhost
+```
+
+Frontend (frontend/.env)
+   ```sh
+      VITE_API_URL=http://localhost:5050/api
+   ```
+
+### Testar login
+   Use os dados do seeder (email:admin@admin.com / password: senha123).
