@@ -40,7 +40,7 @@
       <button
         @click="showAdd = true"
         :disabled="!isAdmin"
-        class="mb-6 px-4 py-2 rounded-lg transition text-white bg-green-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        class="mb-6 px-4 py-2 rounded-lg transition text-white bg-green-600 hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         Criar Usuário
       </button>
@@ -61,7 +61,7 @@
           <button
             @click="edit(user)"
             :disabled="!isAdmin"
-            class="px-3 py-1 bg-yellow-400 text-white rounded hover:bg-yellow-500 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+            class="px-3 py-1 bg-blue-400 text-white rounded hover:bg-blue-500 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
           >
             Editar
           </button>
