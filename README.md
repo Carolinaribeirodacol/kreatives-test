@@ -53,7 +53,7 @@ Este é um projeto FULL STACK com Laravel + Sanctum no backend e Vue + Pinia no 
 ### Variáveis de ambiente importantes
 Backend (backend/.env)
 ```sh
-   APP_URL=http://localhost:5050
+   APP_URL=APP_URL=http://localhost:5000
    DB_HOST=mysql
    DB_PORT=3306
    DB_DATABASE=kreative
